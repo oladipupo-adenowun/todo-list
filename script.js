@@ -2,6 +2,7 @@ const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 const clearCompletedBtn = document.getElementById("clearCompletedBtn");
+const clearAllTasksBtn = document.getElementById("clearAllTasksBtn");
 
 let tasks = [];
 
@@ -15,6 +16,7 @@ function addTask(){
 }
 
 function displayTasks(){
+    taskList.innerHTML = '';
     const li = tasks.map((task, index)=>`
     <li>
         <input type="checkbox" id="task-${index}" ${task.completed ? "checked":""} onchange="()=>toggleTask(${index})">
@@ -34,7 +36,13 @@ function clearCompletedTasks(){
     displayTasks();
 }
 
+function clearAllTasks(){
+    tasks = [];
+    displayTasks();
+}
+
 addTaskBtn.addEventListener('click',addTask);
 clearCompletedBtn.addEventListener('click',clearCompletedTasks);
+clearAllTasksBtn.addEventListener('click',clearAllTasks);
 
 displayTasks();
